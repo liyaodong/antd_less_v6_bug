@@ -1,0 +1,47 @@
+* This is a demo repo to reproduce the less loader issue
+#+begin_src bash
+./node_modules/antd/es/button/style/index.less (./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-7-1!./node_modules/postcss-loader/src??postcss!./node_modules/less-loader/dist/cjs.js??ref--6-oneOf-7-3!./node_modules/antd/es/button/style/index.less)
+ValidationError: Invalid options object. Less Loader has been initialized using an options object that does not match the API schema.
+ - options has an unknown property 'source'. These properties are valid:
+   object { lessOptions?, prependData?, appendData?, sourceMap? }
+#+end_src
+
+** Workaround
+   #+begin_src bash
+     $ yarn remove less-loader
+
+     // less-loader v6.0.0 is not working
+     $ yarn add less-loader@5.0.1
+   #+end_src
+
+** Reproduce Step
+*** create repo by create-react-app
+*** packages may need to install: ~babel-plugin-import~ ~customize-cra~ ~less-loader~ ~react-app-rewired~
+*** follow the [[https://ant.design/docs/react/use-with-create-react-app#Customize-Theme][Customize Theme docs by antd]]
+    #+begin_src javascript
+      const { override, fixBabelImports, addLessLoader } = require('customize-cra')
+
+      module.exports = override(
+        fixBabelImports('import', {
+          libraryName: 'antd',
+          libraryDirectory: 'es',
+          style: true,
+        }),
+        addLessLoader({
+          lessOptions: {
+            javascriptEnabled: true,
+            // See all variables here:
+            // https://github.com/ant-design/ant-design/blob/master/components/style/themes/default.less
+            modifyVars: {
+              '@layout-header-background': '#0D223D',
+
+            }
+          },
+        })
+      )
+    #+end_src
+** possible reason
+*** Caused by customize-cra package
+  https://github.com/arackaf/customize-cra/blob/404854bcbe7436f5834e4c4863001610951d5c3c/src/customizers/webpack.js#L167-L169
+*** related issue
+    https://github.com/arackaf/customize-cra/issues/241
