@@ -40,6 +40,7 @@ ValidationError: Invalid options object. Less Loader has been initialized using 
         })
       )
     #+end_src
+*** Add a <Button> from antd to your App.js and start server
 ** possible reason
 *** Caused by customize-cra package
   https://github.com/arackaf/customize-cra/blob/404854bcbe7436f5834e4c4863001610951d5c3c/src/customizers/webpack.js#L167-L169
