@@ -11,7 +11,7 @@ ValidationError: Invalid options object. Less Loader has been initialized using 
      $ yarn remove less-loader
 
      // less-loader v6.0.0 is not working
-     $ yarn add less-loader@5.0.1
+     $ yarn add less-loader@5.0.0
    #+end_src
 
 ** Reproduce Step
