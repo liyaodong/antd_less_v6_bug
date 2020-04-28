@@ -46,3 +46,4 @@ ValidationError: Invalid options object. Less Loader has been initialized using 
   https://github.com/arackaf/customize-cra/blob/404854bcbe7436f5834e4c4863001610951d5c3c/src/customizers/webpack.js#L167-L169
 *** related issue
     https://github.com/arackaf/customize-cra/issues/241
+    https://github.com/ant-design/ant-design/issues/23624
